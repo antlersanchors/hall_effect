@@ -6,7 +6,7 @@ int led = 13;
 
 int sensorVal;
 
-unsigned long elapsedTime;
+unsigned long prevTime;
 unsigned long currentTime;
 int timeDifference;
 
@@ -24,7 +24,7 @@ void setup() {
   Serial.begin(9600);
 
   // initialize our timer
-  elapsedTime = 0;
+  prevTime = 0;
   currentTime = 0;
 
   sensorActive = false;
@@ -34,6 +34,7 @@ void setup() {
 
 void loop() {
 
+	currentTime = millis();
 
 	sensorVal = analogRead(hall);
 
@@ -41,16 +42,19 @@ void loop() {
 
 		sensorActive = true;
 
-		elapsedTime = millis() - currentTime;
+		timeDifference = prevTime - currentTime;
+		Serial.println("timeDifference: ");
+        Serial.println(timeDifference);
 
-		wheelSpeed = map(elapsedTime, 0, 200, 0, 1023);
+		wheelSpeed = map(timeDifference, 0, 200, 0, 1023);
 		Serial.println(wheelSpeed);
 
-	} else {
+		prevTime = currentTime;
+
+	} else if (sensorVal > sensorThreshold)  {
 
 		sensorActive = false;
 
 	}
-
-	currentTime = millis();
 }
+
