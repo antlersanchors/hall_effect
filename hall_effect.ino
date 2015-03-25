@@ -44,9 +44,9 @@ void loop() {
 
 		timeDifference = currentTime - prevTime;
 		Serial.print("timeDifference: ");
-        Serial.println(timeDifference);
+                Serial.println(timeDifference);
 
-		wheelSpeed = map(timeDifference, 150, 680, 0, 1023);
+		wheelSpeed = map(timeDifference, 150, 680, 1023, 0);
 		Serial.print("wheelSpeed: ");
 		Serial.println(wheelSpeed);
 
@@ -58,6 +58,7 @@ void loop() {
 
 	}
 }
+
 
 
 
