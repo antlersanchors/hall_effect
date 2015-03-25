@@ -10,6 +10,13 @@ unsigned long elapsedTime;
 unsigned long currentTime;
 int timeDifference;
 
+// what value registers as a rotation
+int sensorThreshold;
+boolean sensorActive;
+
+// how fast are you going?
+int wheelSpeed;
+
 void setup() {
   // put your setup code here, to run once:
   pinMode(led, OUTPUT);
@@ -19,13 +26,31 @@ void setup() {
   // initialize our timer
   elapsedTime = 0;
   currentTime = 0;
+
+  sensorActive = false;
+  sensorThreshold = 7;
+
 }
 
 void loop() {
 
-	currentTime = millis() - elapsedTime;
 
 	sensorVal = analogRead(hall);
-	Serial.println(snesorVal);
-	delay(10);
+
+	if (sensorVal < sensorThreshold && sensorActive == false) {
+
+		sensorActive = true;
+
+		elapsedTime = millis() - currentTime;
+
+		wheelSpeed = map(elapsedTime, 0, 200, 0, 1023);
+		Serial.println(wheelSpeed);
+
+	} else {
+
+		sensorActive = false;
+
+	}
+
+	currentTime = millis();
 }
