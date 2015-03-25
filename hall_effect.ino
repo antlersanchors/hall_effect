@@ -42,11 +42,11 @@ void loop() {
 
 		sensorActive = true;
 
-		timeDifference = prevTime - currentTime;
+		timeDifference = currentTime - prevTime;
 		Serial.println("timeDifference: ");
         Serial.println(timeDifference);
 
-		wheelSpeed = map(timeDifference, 0, 200, 0, 1023);
+		wheelSpeed = map(timeDifference, 0, 1000, 0, 1023);
 		Serial.println(wheelSpeed);
 
 		prevTime = currentTime;
@@ -57,4 +57,6 @@ void loop() {
 
 	}
 }
+
+
 
