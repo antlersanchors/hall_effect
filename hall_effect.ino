@@ -2,7 +2,12 @@
 
 int led = 13;
 
-#define hall A0
+// #define hall 4
+#define sensor0 A0
+#define sensor1 A1
+#define sensor2 A2
+#define sensor3 A3
+#define sensor4 A4
 
 int sensorVal;
 
@@ -37,23 +42,27 @@ void loop() {
 	currentTime = millis();
 
 	sensorVal = analogRead(hall);
+	// sensorVal = digitalRead(hall);
+	Serial.println(sensorVal);
+	delay(500);
 
-	if (sensorVal < sensorThreshold && sensorActive == false) {
 
-		sensorActive = true;
+	// if (sensorVal < sensorThreshold && sensorActive == false) {
 
-		timeDifference = currentTime - prevTime;
+	// 	sensorActive = true;
 
-		wheelSpeed = map(timeDifference, 150, 680, 1023, 0);
-		Serial.println(wheelSpeed);
+	// 	timeDifference = currentTime - prevTime;
 
-		prevTime = currentTime;
+	// 	wheelSpeed = map(timeDifference, 150, 680, 1023, 0);
+	// 	Serial.println(wheelSpeed);
 
-	} else if (sensorVal > sensorThreshold)  {
+	// 	prevTime = currentTime;
 
-		sensorActive = false;
+	// } else if (sensorVal > sensorThreshold)  {
 
-	}
+	// 	sensorActive = false;
+
+	// }
 }
 
 
