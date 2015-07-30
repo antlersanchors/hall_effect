@@ -3,11 +3,18 @@
 int led = 13;
 
 // #define hall 4
-#define sensor0 A0
-#define sensor1 A1
-#define sensor2 A2
-#define sensor3 A3
-#define sensor4 A4
+// #define sensor0 A0
+// #define sensor1 A1
+// #define sensor2 A2
+// #define sensor3 A3
+// #define sensor4 A4
+// #define sensor4 A5
+// #define sensor4 A6
+// #define sensor4 A7
+
+#define numSensors 8
+
+int sensor[numSensors]={0,1,2,3,4,5,6,7}:
 
 int sensorVal;
 
@@ -41,9 +48,17 @@ void loop() {
 
 	currentTime = millis();
 
-	sensorVal = analogRead(hall);
+	for (int i=0;i<numSensors;i++){
+
+	sensorVal = analogRead(sensor[i]);
 	// sensorVal = digitalRead(hall);
+	Serial.print("sensor ");
+	Serial.print(i);
+	Serial.print(" : ");
 	Serial.println(sensorVal);
+	
+	}
+
 	delay(500);
 
 
